@@ -1,16 +1,5 @@
 #!/bin/bash
 
-# Note: Checker work with if conditions
-
-
-### Package checker
-# Pass package name to check
-
-# Usage: has php; has node;
-has() {
-    command -v "$1" >/dev/null 2>&1
-}
-
 # Usage: check_any '<condition1>' '<condition2>' ...
 check_any() {
     local condition
