@@ -1,7 +1,13 @@
 #!/bin/bash
 
+# Import other scripts
 source "$(dirname "${BASH_SOURCE[0]}")/scripts/_helper.sh"
 
-if ! has php; then
-    fail "PHP not found"
+
+### Main script
+
+if version_gt 2.55.1 2.54.1 ; then
+    success "Pass"
+else
+    fail "Fail"
 fi

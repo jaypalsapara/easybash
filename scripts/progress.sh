@@ -1,29 +1,37 @@
 #!/bin/bash
 
-# Icons
+### Show progress
+# Echo progress with icon indicators
+
+# Variables
 CHECK="✔"
 CROSS="✘"
 INFO="➜"
 SPINNER="●"
 SPINNER_FRAMES=('⠋' '⠙' '⠹' '⠸' '⠼' '⠴' '⠦' '⠧' '⠇' '⠏')
 
-# Static
 
+## Static
+
+# Usage: progress "Installing..."
 progress(){
     printf "${BLUE}${SPINNER}${NC} %s" "$1"
 }
 
+# Usage: success "Installed successfully"
 success() {
     printf "\r${GREEN}${CHECK}${NC} %s\n" "$1"
 }
 
+# Usage: fail "Installation failed"
 fail() {
     printf "\r${RED}${CROSS}${NC} %s\n" "$1"
 }
 
 
-# Animated
+## Animated
 
+# Usage: start_progress "Installing..."
 start_progress() {
     local msg="$1"
 
@@ -41,6 +49,8 @@ start_progress() {
     SPINNER_PID=$!
 }
 
+# Usage: stop_progress <0|1> "Installed"
+# Here 0 = true and 1 = false
 stop_progress() {
     local status=$1
     local msg="$2"
