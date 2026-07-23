@@ -72,3 +72,37 @@ stop_progress() {
         fail "$msg"
     fi
 }
+
+# Usage: progress_bar <current> <total> [label]
+progress_bar() {
+    local current="$1"
+    local total="$2"
+    local label="${3:-}"
+    local width=40
+
+    local percent=$(( current * 100 / total ))
+    local filled=$(( current * width / total ))
+    local empty=$(( width - filled ))
+
+    if [[ "$current" -eq "$total" ]]; then
+        filled=$width
+        empty=0
+    fi
+
+    local filled_bar=$(printf '%0.s█' $(seq 1 $filled))
+    local empty_bar=$(printf '%0.s░' $(seq 1 $empty))
+
+    if [[ $empty -eq '0' ]]; then
+        empty_bar=''
+    fi
+
+    printf "\r${CYAN}!${NC} %s [${WHITE}%s${NC}%s] %3s" \
+        "$label" \
+        "$filled_bar" \
+        "$empty_bar" \
+        "${percent}% " >&2
+
+    if [[ "$current" -eq "$total" ]]; then
+        printf "\n" >&2
+    fi
+}
