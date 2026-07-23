@@ -4,4 +4,4 @@
 CHECK="✓"
 CROSS="✗"
 INFO="➝"
-SPINNER="●"
+SPINNER="•"
