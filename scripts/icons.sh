@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Variables
-CHECK="✔"
-CROSS="✘"
-INFO="➜"
+CHECK="✓"
+CROSS="✗"
+INFO="➝"
 SPINNER="●"
