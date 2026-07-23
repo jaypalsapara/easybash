@@ -96,11 +96,12 @@ progress_bar() {
         empty_bar=''
     fi
 
-    printf "\r${CYAN}!${NC} %s [${WHITE}%s${NC}%s] %3s" \
+    printf "\r${CYAN}!${NC} %s [${WHITE}%s${NC}%s] %3s (%s) " \
         "$label" \
         "$filled_bar" \
         "$empty_bar" \
-        "${percent}% " >&2
+        "${percent}%" \
+        "${current}/${total}" >&2
 
     if [[ "$current" -eq "$total" ]]; then
         printf "\n" >&2
