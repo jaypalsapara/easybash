@@ -1,31 +1,39 @@
 #!/bin/bash
 
+source "$(dirname "${BASH_SOURCE[0]}")/colors.sh"
+source "$(dirname "${BASH_SOURCE[0]}")/icons.sh"
+
 ### Show progress
 # Echo progress with icon indicators
 
 # Variables
-CHECK="✔"
-CROSS="✘"
-INFO="➜"
-SPINNER="●"
 SPINNER_FRAMES=('⠋' '⠙' '⠹' '⠸' '⠼' '⠴' '⠦' '⠧' '⠇' '⠏')
+LAST_PROGRESS=""
 
 
 ## Static
 
 # Usage: progress "Installing..."
 progress(){
-    printf "${BLUE}${SPINNER}${NC} %s" "$1"
+   LAST_PROGRESS="$1"
+   printf "\r${BLUE}${SPINNER}${NC} %s" "$LAST_PROGRESS"
 }
 
 # Usage: success "Installed successfully"
 success() {
-    printf "\r${GREEN}${CHECK}${NC} %s\n" "$1"
+    local msg="${1:-$LAST_PROGRESS}"
+    printf "\r\033[K${GREEN}${CHECK}${NC} %s\n" "$msg"
 }
 
 # Usage: fail "Installation failed"
 fail() {
-    printf "\r${RED}${CROSS}${NC} %s\n" "$1"
+    local msg="${1:-$LAST_PROGRESS}"
+    printf "\r\033[K${RED}${CROSS}${NC} %s\n" "$msg"
+}
+
+info() {
+    local msg="${1:-$LAST_PROGRESS}"
+    printf "\r\033[K${CYAN}${INFO}${NC} %s\n" "$msg"
 }
 
 
